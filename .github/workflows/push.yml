@@ -1,0 +1,29 @@
+on: push
+name: npm install, build, lint, test
+jobs:
+  build-and-test:
+    name: build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: npm install
+        uses: actions/npm@master
+        with:
+          args: install
+      - name: npm eslint
+        uses: actions/npm@master
+        with:
+          args: run eslint
+      - name: npm tslint
+        uses: actions/npm@master
+        with:
+          args: run tslint
+      - name: npm markdown-lint
+        uses: actions/npm@master
+        with:
+          args: run markdown-lint
+      - name: npm test
+        uses: actions/npm@master
+        with:
+          args: run test
+
